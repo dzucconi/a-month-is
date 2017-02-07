@@ -1,0 +1,77 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: white;
+  color: black;
+  font-family: 'Times New Roman', serif;
+  line-height: 1.33;
+}
+
+.calendar {
+  width: 50%;
+  padding: 1em;
+  border: 1px solid black;
+}
+  .calendar__header {
+    text-align: center;
+    font-size: 150%;
+  }
+  .calendar__periods {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+  th {
+    font-weight: normal;
+  }
+
+  thead > tr:last-child {
+    text-align: left;
+  }
+    thead > tr:last-child > th {
+      border-bottom: 1px solid red;
+    }
+
+  tbody > tr > td:first-child {
+    text-align: right;
+    padding-right: 1em;
+    text-transform: uppercase;
+  }
+
+.period {
+  width: 50%;
+  margin: 1em auto;
+}
+  .period:nth-child(even) {
+    padding-left: 1em;
+  }
+  .period:nth-child(odd) {
+    padding-right: 1em;
+  }
+  .period:last-child {
+    padding: 0;
+  }
+
+.month--odd {
+  color: red;
+}
