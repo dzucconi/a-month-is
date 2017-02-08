@@ -17,16 +17,22 @@ const DOM = {
 const monthClass = m =>
   m.month() % 2 ? 'month--odd' : 'month--even';
 
+const constructMonths = R.splitEvery(28);
+const constructWeeks =  R.splitEvery(7);
+const constructMonthsWithWeeks = xs => constructMonths(xs).map(constructWeeks);
+
 export default () => {
   const { year } = parameters({
-    year: 2017,
+    year: new Date().getUTCFullYear(),
   });
 
   const thisYear = Array.from(moment.range(`${year}-01-01`, `${year}-12-31`).by('day'));
-  const shiftOver = thisYear[0].weekday();
-  const paddedDays = Array.from(moment.range(`${year - 1}-12-${31 - (shiftOver - 1)}`, `${year - 1}-12-31`).by('day'));
-  const days = paddedDays.concat(thisYear);
-  const months = R.dropLast(1, R.splitEvery(28, days)).map(month => R.splitEvery(7, month));
+  const shift = thisYear[0].weekday();
+  const padding = Array.from(moment.range(`${year - 1}-12-${31 - (shift - 1)}`, `${year - 1}-12-31`).by('day'));
+  const days = padding.concat(thisYear);
+  const months = R.dropLast(1, constructMonthsWithWeeks(days));
+  const order = R.unnest(R.apply(R.zip, R.splitEvery(6, R.range(0, 12)))).concat(12);
+  const periods = order.map(n => months[n]);
 
   DOM.app.innerHTML = `
     <div class='calendar'>
@@ -35,14 +41,14 @@ export default () => {
         <h2>${year} FACTORY CALENDAR</h2>
       </div>
       <div class='calendar__periods'>
-        ${months.map((month, i) => `
+        ${periods.map((month, i) => `
           <div class='period'>
             <table>
               <thead>
                 <tr>
                   <th></th>
                   <th colspan='7'>
-                    ${ordinalize(i + 1)} <span>Period</span>
+                    ${ordinalize(order[i] + 1)} <span>Period</span>
                   </th>
                 </tr>
                 <tr>
