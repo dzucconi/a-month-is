@@ -8,6 +8,8 @@ import parameters from 'queryparams';
 
 window.parameters = parameters;
 
+import ordinalize from './lib/ordinalize';
+
 const DOM = {
   app: document.getElementById('app'),
 };
@@ -29,8 +31,8 @@ export default () => {
   DOM.app.innerHTML = `
     <div class='calendar'>
       <div class='calendar__header'>
-        KODAK<br>
-        ${year} 13-PERIOD CALENDAR
+        <h1>KODAK COMPANY</h1>
+        <h2>${year} FACTORY CALENDAR</h2>
       </div>
       <div class='calendar__periods'>
         ${months.map((month, i) => `
@@ -39,7 +41,9 @@ export default () => {
               <thead>
                 <tr>
                   <th></th>
-                  <th colspan='7'>Period ${i + 1}</th>
+                  <th colspan='7'>
+                    ${ordinalize(i + 1)} <span>Period</span>
+                  </th>
                 </tr>
                 <tr>
                   <th></th>
@@ -60,7 +64,9 @@ export default () => {
                   return `
                     <tr>
                       <td class='day ${monthClass(week[0])}'>
-                        ${i === 0 || prev && prev[0].format('MMM') !== label ? label : ''}
+                        <span>
+                          ${i === 0 || prev && prev[0].format('MMM') !== label ? `${label}.` : ''}
+                        </span>
                       </td>
                       ${week.map(day => `
                         <td class='day ${monthClass(day)}'>
