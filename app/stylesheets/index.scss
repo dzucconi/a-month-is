@@ -1,0 +1,174 @@
+$font: 'Garamond Premier Pro', 'Times New Roman', serif;
+// $font: 'Helvetica Neue';
+
+$width: 12cm;
+$height: 20cm;
+
+$headerHeight: 2.5cm;
+
+$periodsHeight: 16cm;
+$periodsOffset: 0.5cm;
+
+$backgroundColor: white;
+$foregroundColor: black;
+$secondaryColor: red;
+
+$borderWidth: 0.5px;
+
+$factor: 2;
+
+@function apply($value) {
+  @return $value * $factor;
+}
+
+html {
+  box-sizing: border-box;
+
+  transform: scale(0.5);
+  transform-origin: 0 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $backgroundColor;
+  color: $foregroundColor;
+  font-family: $font;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1;
+}
+
+h1,
+h2,
+h3 {
+  font-size: 100%;
+  font-weight: normal;
+  margin: 0;
+}
+
+.calendar {
+  /*background: white url('reference-bg.png') no-repeat center center;*/
+  width: apply($width);
+  height: apply($height);
+  border: apply($borderWidth) dashed $foregroundColor;
+  background-size: contain;
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    height: apply($headerHeight);
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+
+    > h1 {
+      padding-top: apply(1cm);
+      font-size: apply(12pt);
+    }
+
+    > h2 {
+      font-size: apply(21pt);
+    }
+  }
+
+  &__periods {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: apply($periodsHeight);
+    padding-right: apply($periodsOffset);
+  }
+}
+
+.period {
+  width: 50%;
+  padding-top: apply(3pt);
+
+  &:last-child {
+    margin: 0 auto;
+    transform: translateX(apply($periodsOffset / 2));
+  }
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  font-weight: normal;
+  line-height: 0.6;
+  font-size: apply(12pt);
+  padding-top: apply(4pt);
+}
+
+thead {
+  /* Period header */
+  > tr:first-child {
+    > th {
+      font-size: apply(9pt);
+      padding-bottom: apply(2pt);
+
+      > span {
+        text-transform: uppercase;
+        letter-spacing: apply(0.5pt);
+        font-size: apply(7pt);
+      }
+    }
+  }
+}
+
+  /* Weekday header */
+  thead > tr:last-child > th {
+    border: apply($borderWidth) solid;
+    border-bottom-color: $secondaryColor;
+    line-height: 0.5;
+    font-size: apply(7pt);
+    padding: apply(3pt) 0 apply(1.5pt);
+  }
+    thead > tr:last-child > th:first-child {
+      border: none;
+    }
+
+  /* Days */
+  td {
+    border: apply($borderWidth) solid $foregroundColor;
+    border-top: 0;
+    border-bottom: 0;
+    text-align: center;
+    font-size: apply(10pt);
+    line-height: 1;
+    padding: apply(1.5pt) 0 0 0;
+  }
+  tbody > tr:last-child > td {
+    border-bottom: apply($borderWidth) solid $foregroundColor;
+  }
+
+  /* Month abbreviations */
+  tbody > tr > td:first-child {
+    width: 4em;
+    text-align: right;
+    padding-right: apply(2pt);
+    text-transform: uppercase;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: apply(0.5pt);
+    font-size: apply(7pt);
+  }
+
+.month--odd {
+  color: $secondaryColor;
+}
