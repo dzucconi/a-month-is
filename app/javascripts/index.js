@@ -37,7 +37,7 @@ export default () => {
   DOM.app.innerHTML = `
     <div class='calendar'>
       <div class='calendar__header'>
-        <h1>KODAK COMPANY</h1>
+        <h1>EASTMAN KODAK COMPANY</h1>
         <h2>${year} FACTORY CALENDAR</h2>
       </div>
       <div class='calendar__periods'>
@@ -86,6 +86,10 @@ export default () => {
             </table>
           </div>
         `).join('')}
+      </div>
+      <div class='calendar__logos'>
+        <img src='images/ekc.png'>
+        <img src='images/ekc.png'>
       </div>
     </div>
   `;
