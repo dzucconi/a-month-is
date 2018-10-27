@@ -28,3 +28,6 @@ public/
 # Secrets
 .env
 .s3config
+
+# Assets
+print/
