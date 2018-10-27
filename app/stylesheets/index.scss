@@ -4,7 +4,6 @@
 }
 
 $font: 'Garamond Premier Pro', 'Times New Roman', serif;
-// $font: 'Helvetica Neue';
 
 $width: 12cm;
 $height: 20cm;
@@ -62,8 +61,8 @@ h3 {
 }
 
 .calendar {
-  position: relative;
   // background: white url('reference-bg.png') no-repeat center center;
+  position: relative;
   background-color: $backgroundColor;
   width: apply($width);
   height: apply($height);
